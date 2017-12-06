@@ -9,19 +9,17 @@ describe('number validates', function () {
       ['',
         {card: null, isPotentiallyValid: true, isValid: false}],
       ['6',
-        {card: null, isPotentiallyValid: true, isValid: false}],
+        {card: null, isPotentiallyValid: false, isValid: false}],
       ['60',
-        {card: null, isPotentiallyValid: true, isValid: false}],
+        {card: null, isPotentiallyValid: false, isValid: false}],
       ['601',
-        {card: null, isPotentiallyValid: true, isValid: false}],
-      ['6011',
-        {card: 'discover', isPotentiallyValid: true, isValid: false}],
+        {card: null, isPotentiallyValid: false, isValid: false}],
       ['4',
-        {card: 'visa', isPotentiallyValid: true, isValid: false}],
+        {card: null, isPotentiallyValid: false, isValid: false}],
       ['41',
-        {card: 'visa', isPotentiallyValid: true, isValid: false}],
+        {card: null, isPotentiallyValid: false, isValid: false}],
       ['411',
-        {card: 'visa', isPotentiallyValid: true, isValid: false}],
+        {card: null, isPotentiallyValid: false, isValid: false}],
       ['',
         {card: null, isPotentiallyValid: true, isValid: false}],
       ['x',
@@ -50,11 +48,13 @@ describe('number validates', function () {
       ['4111111111111111',
         {card: 'visa', isPotentiallyValid: true, isValid: true}],
       ['6011000990139424',
-        {card: 'discover', isPotentiallyValid: true, isValid: true}],
+        {card: 'hipercard', isPotentiallyValid: true, isValid: true}],
+      ['4514163262437293',
+        {card: 'elo', isPotentiallyValid: true, isValid: true}],
       ['411111y',
         {card: null, isPotentiallyValid: false, isValid: false}],
       ['41111111111111111111', // Too long
-        {card: 'visa', isPotentiallyValid: false, isValid: false}],
+        {card: null, isPotentiallyValid: false, isValid: false}],
       ['4111111111111112', // right length, not Luhn, potentialls valid because visas can be 19 digits
         {card: 'visa', isPotentiallyValid: true, isValid: false}]
     ]);
@@ -67,23 +67,14 @@ describe('number validates', function () {
       ['4111 1111 1111 1111',
         {card: 'visa', isPotentiallyValid: true, isValid: true}],
       ['601 1 1 1  1 1 1 1   1 1 1 1 1 7',
-        {card: 'discover', isPotentiallyValid: true, isValid: true}]
-    ]);
-  });
-
-  describe('Discover', function () {
-    table([
-      ['6011111',
-        {card: 'discover', isPotentiallyValid: true, isValid: false}],
-      ['6011111111111117',
-        {card: 'discover', isPotentiallyValid: true, isValid: true}]
+        {card: 'hipercard', isPotentiallyValid: true, isValid: true}]
     ]);
   });
 
   describe('MasterCard', function () {
     table([
       ['2',
-        {card: null, isPotentiallyValid: true, isValid: false}],
+        {card: 'master-card', isPotentiallyValid: true, isValid: false}],
       ['27',
         {card: 'master-card', isPotentiallyValid: true, isValid: false}],
       ['272',
@@ -99,39 +90,12 @@ describe('number validates', function () {
     ]);
   });
 
-  describe('Maestro', function () {
-    table([
-      ['602011', {card: 'maestro', isPotentiallyValid: true, isValid: false}],
-      ['500000000000', {card: 'maestro', isPotentiallyValid: true, isValid: false}],
-      ['500000000000061', {card: 'maestro', isPotentiallyValid: true, isValid: false}],
-      ['5000000000000611', {card: 'maestro', isPotentiallyValid: true, isValid: true}],
-      ['5000000000000612', {card: 'maestro', isPotentiallyValid: true, isValid: false}],
-      ['500000000000000005', {card: 'maestro', isPotentiallyValid: true, isValid: false}],
-      ['5000000000000000005', {card: 'maestro', isPotentiallyValid: true, isValid: true}],
-      ['5000000000000000001', {card: 'maestro', isPotentiallyValid: false, isValid: false}],
-      ['50000000000000000009', {card: 'maestro', isPotentiallyValid: false, isValid: false}]
-    ]);
-  });
-
   describe('Amex', function () {
     table([
       ['3782',
         {card: 'american-express', isPotentiallyValid: true, isValid: false}],
       ['378282246310005',
         {card: 'american-express', isPotentiallyValid: true, isValid: true}]
-    ]);
-  });
-
-  describe('JCB', function () {
-    table([
-      ['1',
-        {card: 'jcb', isPotentiallyValid: true, isValid: false}],
-      ['21',
-        {card: 'jcb', isPotentiallyValid: true, isValid: false}],
-      ['3530111',
-        {card: 'jcb', isPotentiallyValid: true, isValid: false}],
-      ['3530111333300000',
-        {card: 'jcb', isPotentiallyValid: true, isValid: true}]
     ]);
   });
 
